@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CostByte - AI-Powered Food Cost Management</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --dark-blue: #1a365d;
+            --navy: #2a4365;
+            --slate: #4a5568;
+            --dark-gray: #2d3748;
+            --medium-gray: #718096;
+            --light-gray: #e2e8f0;
+            --white: #ffffff;
+            --black: #1a202c;
+            --accent: #4299e1;
+            --accent-dark: #3182ce;
+            --highlight: #f8f9fa;
+            --border: #e2e8f0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--black);
+            line-height: 1.6;
+            background-color: var(--white);
+            font-size: 16px;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--dark-gray);
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(rgba(26, 54, 93, 0.9), rgba(26, 54, 93, 0.9)), url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            font-size: 2rem;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 2rem;
+        }
+        
+        nav ul li a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        nav ul li a:hover {
+            color: var(--light-gray);
+        }
+        
+        .cta-button {
+            background-color: var(--white);
+            color: var(--dark-blue);
+            padding: 0.6rem 1.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .cta-button:hover {
+            background-color: var(--light-gray);
+            transform: translateY(-2px);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(26, 54, 93, 0.85), rgba(26, 54, 93, 0.85)), url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            padding: 6rem 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            color: var(--light-gray);
+        }
+        
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .button {
+            padding: 0.9rem 2.2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        .button.primary {
+            background-color: var(--accent);
+            color: var(--white);
+        }
+        
+        .button.secondary {
+            background-color: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+        
+        .button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .button.primary:hover {
+            background-color: var(--accent-dark);
+        }
+        
+        .button.secondary:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 5rem 0;
+            background-color: var(--highlight);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.3rem;
+            color: var(--dark-blue);
+        }
+        
+        .section-title p {
+            color: var(--slate);
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 2.2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 1.2rem;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--dark-gray);
+        }
+        
+        .feature-card p {
+            color: var(--slate);
+            line-height: 1.7;
+        }
+        
+        /* AI Helpers Section */
+        .ai-helpers {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, var(--dark-gray) 0%, var(--dark-blue) 100%);
+            color: var(--white);
+        }
+        
+        .ai-helpers .section-title h2 {
+            color: var(--white);
+        }
+        
+        .ai-helpers .section-title p {
+            color: var(--light-gray);
+        }
+        
+        .helpers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .helper-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border-radius: 8px;
+            padding: 2.2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .helper-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.12);
+        }
+        
+        .helper-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.2rem;
+            font-size: 2rem;
+        }
+        
+        .helper-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+        
+        .helper-card p {
+            color: var(--light-gray);
+            line-height: 1.7;
+        }
+        
+        /* Clients Section */
+        .clients {
+            padding: 4rem 0;
+            background-color: var(--white);
+        }
+        
+        .client-logos {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .client-logo {
+            background-color: var(--highlight);
+            padding: 1.5rem 2rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            font-weight: 600;
+            color: var(--dark-gray);
+            border: 1px solid var(--border);
+        }
+        
+        /* Pricing Section */
+        .pricing {
+            padding: 5rem 0;
+            background-color: var(--highlight);
+        }
+        
+        .pricing-card {
+            background: var(--white);
+            border-radius: 10px;
+            padding: 3.5rem;
+            color: var(--dark-gray);
+            text-align: center;
+            max-width: 500px;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border: 2px solid var(--dark-blue);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .popular-badge {
+            position: absolute;
+            top: 20px;
+            right: -34px;
+            background: var(--dark-blue);
+            color: var(--white);
+            padding: 0.3rem 2.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transform: rotate(45deg);
+        }
+        
+        .price {
+            font-size: 3.2rem;
+            font-weight: 700;
+            margin: 1.2rem 0;
+            color: var(--dark-blue);
+        }
+        
+        .price span {
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: var(--slate);
+        }
+        
+        .pricing-card ul {
+            list-style: none;
+            margin: 1.8rem 0;
+            text-align: left;
+            padding: 0 1.5rem;
+        }
+        
+        .pricing-card ul li {
+            padding: 0.6rem 0;
+            color: var(--slate);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .pricing-card ul li:last-child {
+            border-bottom: none;
+        }
+        
+        .pricing-card ul li i {
+            color: var(--accent);
+            margin-right: 0.8rem;
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, var(--dark-blue) 0%, var(--navy) 100%);
+            color: var(--white);
+            text-align: center;
+        }
+        
+        .cta h2 {
+            color: var(--white);
+            font-size: 2.3rem;
+        }
+        
+        .cta p {
+            color: var(--light-gray);
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Form */
+        .form-container {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 2.5rem;
+            max-width: 500px;
+            margin: 2.5rem auto 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.6rem;
+            font-weight: 500;
+            color: var(--dark-gray);
+        }
+        
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.9rem 1.2rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 1rem;
+            color: var(--dark-gray);
+            background-color: var(--highlight);
+        }
+        
+        .form-button {
+            background: linear-gradient(135deg, var(--dark-blue) 0%, var(--navy) 100%);
+            color: var(--white);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+        
+        .form-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-gray);
+            color: var(--light-gray);
+            padding: 4rem 0 2rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2.5rem;
+        }
+        
+        .footer-section h3 {
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+        
+        .footer-section p {
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+        
+        .footer-section i {
+            margin-right: 0.8rem;
+            color: var(--accent);
+            width: 20px;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2.5rem;
+            margin-top: 2.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--medium-gray);
+            font-size: 0.9rem;
+        }
+        
+        /* Dashboard Button */
+        .dashboard-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, var(--dark-blue) 0%, var(--navy) 100%);
+            color: var(--white);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            z-index: 999;
+            animation: pulse 2s infinite, drift 8s infinite ease-in-out;
+            text-decoration: none;
+            border: 2px solid var(--white);
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes drift {
+            0% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-10px) rotate(2deg); }
+            50% { transform: translateY(0) rotate(0deg); }
+            75% { transform: translateY(10px) rotate(-2deg); }
+            100% { transform: translateY(0) rotate(0deg); }
+        }
+        
+        /* Dashboard Modal */
+        .dashboard-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        
+        .dashboard-content {
+            background: var(--white);
+            width: 90%;
+            max-width: 1200px;
+            height: 85vh;
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .dashboard-sidebar {
+            width: 250px;
+            background: var(--dark-blue);
+            color: var(--white);
+            padding: 2rem 1rem;
+        }
+        
+        .dashboard-main {
+            flex: 1;
+            padding: 2.5rem;
+            overflow-y: auto;
+            background: var(--highlight);
+        }
+        
+        .close-dashboard {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: var(--white);
+            font-size: 1.8rem;
+            cursor: pointer;
+            z-index: 1001;
+            background: rgba(0, 0, 0, 0.3);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.8rem;
+            margin-bottom: 2.5rem;
+        }
+        
+        .stat-card {
+            background: var(--white);
+            padding: 1.8rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border);
+        }
+        
+        .stat-value {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--dark-blue);
+            margin: 0.8rem 0;
+        }
+        
+        .stat-card p {
+            color: var(--slate);
+            font-size: 0.9rem;
+        }
+        
+        .dashboard-section {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border);
+        }
+        
+        /* Login Modal */
+        .login-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .login-content {
+            background: var(--white);
+            width: 90%;
+            max-width: 450px;
+            border-radius: 12px;
+            overflow: hidden;
+            padding: 2.5rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .login-header h2 {
+            color: var(--dark-blue);
+            font-size: 1.8rem;
+        }
+        
+        .login-form .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .login-button {
+            background: linear-gradient(135deg, var(--dark-blue) 0%, var(--navy) 100%);
+            color: var(--white);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+        
+        .login-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 1.2rem;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            nav ul li {
+                margin: 0 0.5rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .client-logos {
+                gap: 1.2rem;
+            }
+            
+            .dashboard-content {
+                flex-direction: column;
+                height: 90vh;
+            }
+            
+            .dashboard-sidebar {
+                width: 100%;
+                padding: 1.5rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-brain"></i>
+                    <span>CostByte</span>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#ai-helpers">AI Helpers</a></li>
+                        <li><a href="#clients">Clients</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+                <a href="#demo" class="cta-button">Request Demo</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Transform Your Kitchen Operations with AI</h1>
+            <p>Headsup AI is a powerful food cost-saving and kitchen operations tool that helps hotels and restaurants improve margins, streamline processes, and make smarter purchasing decisions.</p>
+            <div class="hero-buttons">
+                <a href="#demo" class="button primary">Get Started</a>
+                <a href="#features" class="button secondary">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>How Headsup AI Helps Your Business</h2>
+                <p>Powerful features designed to reduce costs and improve efficiency</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Real-time Food Cost Tracking</h3>
+                    <p>See how your food cost is performing across locations daily, not just at month-end.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    <h3>Price Change Alerts</h3>
+                    <p>Be instantly alerted when supplier prices increase — no more surprises on your P&L.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <h3>Smart Purchasing Insights</h3>
+                    <p>Identify lower-cost suppliers or opportunities to consolidate orders.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-trash-alt"></i>
+                    </div>
+                    <h3>Waste Monitoring</h3>
+                    <p>Spot where and why waste is happening and reduce unnecessary losses.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>Inventory Automation</h3>
+                    <p>Save hours on manual stock counts with mobile-based inventory tools.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h3>Military-Grade Security</h3>
+                    <p>Your data is protected with the highest security standards and compliance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Helpers Section -->
+    <section class="ai-helpers" id="ai-helpers">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our AI Assistant Team</h2>
+                <p>CostByte uses synthetic intelligence to create a team of AI helpers that complete complex tasks</p>
+            </div>
+            <div class="helpers-grid">
+                <div class="helper-card">
+                    <div class="helper-icon">
+                        <i class="fas fa-analytics"></i>
+                    </div>
+                    <h3>Data Analyst</h3>
+                    <p>Analyzes your food cost data and identifies savings opportunities</p>
+                </div>
+                <div class="helper-card">
+                    <div class="helper-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>Inventory Manager</h3>
+                    <p>Automates inventory tracking and predicts ordering needs</p>
+                </div>
+                <div class="helper-card">
+                    <div class="helper-icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <h3>Cost Predictor</h3>
+                    <p>Forecasts price fluctuations and recommends optimal purchasing times</p>
+                </div>
+                <div class="helper-card">
+                    <div class="helper-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Security Guardian</h3>
+                    <p>Ensures military-grade security and compliance with regional regulations</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Clients Section -->
+    <section class="clients" id="clients">
+        <div class="container">
+            <div class="section-title">
+                <h2>Trusted by Industry Leaders</h2>
+                <p>Join these renowned establishments using Headsup AI</p>
+            </div>
+            <div class="client-logos">
+                <div class="client-logo">Tasha's Group</div>
+                <div class="client-logo">Ocean Basket</div>
+                <div class="client-logo">The Hussar Grill</div>
+                <div class="client-logo">Doppio Zero</div>
+                <div class="client-logo">Mugg & Bean</div>
+                <div class="client-logo">The Capetonian</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="section-title">
+                <h2>Simple, Transparent Pricing</h2>
+                <p>Get started with Headsup AI for just</p>
+            </div>
+            <div class="pricing-card">
+                <div class="popular-badge">MOST POPULAR</div>
+                <h3>Headsup AI Premium</h3>
+                <div class="price">R799<span>/month</span></div>
+                <p>Per location - no hidden fees</p>
+                <ul>
+                    <li><i class="fas fa-check-circle"></i> All Features Included</li>
+                    <li><i class="fas fa-check-circle"></i> Priority Support</li>
+                    <li><i class="fas fa-check-circle"></i> Regular Updates</li>
+                    <li><i class="fas fa-check-circle"></i> 14-Day Free Trial</li>
+                    <li><i class="fas fa-check-circle"></i> Multi-Location Support</li>
+                </ul>
+                <a href="#demo" class="button primary">Start Free Trial</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta" id="demo">
+        <div class="container">
+            <h2>Ready to Transform Your Kitchen Operations?</h2>
+            <p>Request a demo today and see how Headsup AI can help your business save costs</p>
+            
+            <div class="form-container">
+                <h3>Request a Demo</h3>
+                <form id="demoForm">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="business">Business Type</label>
+                        <select id="business" required>
+                            <option value="">Select Business Type</option>
+                            <option value="hotel">Hotel</option>
+                            <option value="restaurant">Restaurant</option>
+                            <option value="group">Restaurant Group</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="locations">Number of Locations</label>
+                        <select id="locations" required>
+                            <option value="">Select Number</option>
+                            <option value="1">1</option>
+                            <option value="2-5">2-5</option>
+                            <option value="6-10">6-10</option>
+                            <option value="10+">10+</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="form-button">Request Demo</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>CostByte</h3>
+                    <p>AI-powered solutions for the food and hospitality industry. Helping businesses reduce costs and improve efficiency.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-user"></i> Nicholas Holman</p>
+                    <p><i class="fas fa-briefcase"></i> Business Consultant – Food & Hospitality</p>
+                    <p><i class="fas fa-phone"></i> 0691081301</p>
+                    <p><i class="fas fa-envelope"></i> info@costbyte.com</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Compliance</h3>
+                    <p>Fully compliant with regulations in South Africa, Namibia, and Botswana.</p>
+                    <p><i class="fas fa-shield-alt"></i> Military-grade security</p>
+                    <p><i class="fas fa-lock"></i> Data encryption at rest and in transit</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 CostByte. All rights reserved. | Privacy Policy | Terms of Service</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Dashboard Button -->
+    <a class="dashboard-button" id="dashboardBtn">
+        <i class="fas fa-chart-line"></i>
+    </a>
+
+    <!-- Login Modal -->
+    <div class="login-modal" id="loginModal">
+        <div class="close-dashboard" id="closeLogin">
+            <i class="fas fa-times"></i>
+        </div>
+        <div class="login-content">
+            <div class="login-header">
+                <h2>Owner Login</h2>
+                <p>Access your secure dashboard</p>
+            </div>
+            <form class="login-form" id="loginForm">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" placeholder="Enter your username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="login-button">Login to Dashboard</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Dashboard Modal -->
+    <div class="dashboard-modal" id="dashboardModal">
+        <div class="close-dashboard" id="closeDashboard">
+            <i class="fas fa-times"></i>
+        </div>
+        <div class="dashboard-content">
+            <div class="dashboard-sidebar">
+                <h3 style="color: white; text-align: center; margin-bottom: 2rem;">CostByte Dashboard</h3>
+                <ul style="list-style: none; color: white;">
+                    <li style="padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                        <i class="fas fa-tachometer-alt"></i> Overview
+                    </li>
+                    <li style="padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                        <i class="fas fa-chart-bar"></i> Analytics
+                    </li>
+                    <li style="padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                        <i class="fas fa-users"></i> Clients
+                    </li>
+                    <li style="padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                        <i class="fas fa-money-bill-wave"></i> Financials
+                    </li>
+                    <li style="padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                        <i class="fas fa-cog"></i> Settings
+                    </li>
+                </ul>
+            </div>
+            <div class="dashboard-main">
+                <h2>Performance Overview</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h4>Total Sign-ups</h4>
+                        <div class="stat-value">87</div>
+                        <p>Goal: 100 in 15 days</p>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Active Clients</h4>
+                        <div class="stat-value">42</div>
+                        <p>+5 this week</p>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Monthly Revenue</h4>
+                        <div class="stat-value">R33,558</div>
+                        <p>Projected: R45,000</p>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Conversion Rate</h4>
+                        <div class="stat-value">23%</div>
+                        <p>Industry avg: 15%</p>
+                    </div>
+                </div>
+                
+                <div class="dashboard-section">
+                    <h3>AI Performance Metrics</h3>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <h4>Content Generated</h4>
+                            <div class="stat-value">128</div>
+                            <p>Articles & Posts</p>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Emails Sent</h4>
+                            <div class="stat-value">1,542</div>
+                            <p>Open rate: 34%</p>
+                        </div>
+                        <div class="stat-card">
+                            <h4>AI Accuracy</h4>
+                            <div class="stat-value">94%</div>
+                            <p>Lead targeting</p>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Cost Savings</h4>
+                            <div class="stat-value">R18,250</div>
+                            <p>Identified for clients</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dashboard-section">
+                    <h3>Financial Overview</h3>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <h4>Monthly Recurring Revenue</h4>
+                            <div class="stat-value">R33,558</div>
+                            <p>From 42 clients</p>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Average Revenue Per User</h4>
+                            <div class="stat-value">R799</div>
+                            <p>Per location</p>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Churn Rate</h4>
+                            <div class="stat-value">2.3%</div>
+                            <p>Last 30 days</p>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Lifetime Value</h4>
+                            <div class="stat-value">R9,588</div>
+                            <p>Per client</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dashboard-section">
+                    <h3>Recent Sign-ups</h3>
+                    <div style="background: var(--highlight); padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                        <table style="width: 100%; border-collapse: collapse;">
+                            <thead>
+                                <tr style="border-bottom: 2px solid var(--border);">
+                                    <th style="text-align: left; padding: 0.8rem;">Business</th>
+                                    <th style="text-align: left; padding: 0.8rem;">Type</th>
+                                    <th style="text-align: left; padding: 0.8rem;">Location</th>
+                                    <th style="text-align: left; padding: 0.8rem;">Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom: 1px solid var(--border);">
+                                    <td style="padding: 0.8rem;">Sunset Hotel</td>
+                                    <td style="padding: 0.8rem;">Hotel</td>
+                                    <td style="padding: 0.8rem;">Cape Town</td>
+                                    <td style="padding: 0.8rem;">Today</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border);">
+                                    <td style="padding: 0.8rem;">Ocean View Restaurant</td>
+                                    <td style="padding: 0.8rem;">Restaurant</td>
+                                    <td style="padding: 0.8rem;">Durban</td>
+                                    <td style="padding: 0.8rem;">Yesterday</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border);">
+                                    <td style="padding: 0.8rem;">Mountain Lodge</td>
+                                    <td style="padding: 0.8rem;">Hotel</td>
+                                    <td style="padding: 0.8rem;">Johannesburg</td>
+                                    <td style="padding: 0.8rem;">2 days ago</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Form submission handling
+        document.getElementById('demoForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const business = document.getElementById('business').value;
+            const locations = document.getElementById('locations').value;
+            
+            // In a real implementation, this would send data to a server
+            // For demo purposes, we'll show an alert and update the dashboard
+            alert(`Thank you ${name}! Your demo request has been received. We will contact you at ${email} shortly.`);
+            
+            // Update dashboard stats (simulated)
+            const totalSignups = document.querySelector('.stat-value');
+            let currentSignups = parseInt(totalSignups.textContent);
+            totalSignups.textContent = currentSignups + 1;
+            
+            // Add to recent sign-ups (simulated)
+            const signupsTable = document.querySelector('tbody');
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td style="padding: 0.8rem;">${name}</td>
+                <td style="padding: 0.8rem;">${business}</td>
+                <td style="padding: 0.8rem;">South Africa</td>
+                <td style="padding: 0.8rem;">Just now</td>
+            `;
+            newRow.style.borderBottom = '1px solid var(--border)';
+            signupsTable.prepend(newRow);
+            
+            // Reset form
+            document.getElementById('demoForm').reset();
+        });
+        
+        // Dashboard functionality
+        const dashboardBtn = document.getElementById('dashboardBtn');
+        const dashboardModal = document.getElementById('dashboardModal');
+        const loginModal = document.getElementById('loginModal');
+        const closeDashboard = document.getElementById('closeDashboard');
+        const closeLogin = document.getElementById('closeLogin');
+        const loginForm = document.getElementById('loginForm');
+        
+        dashboardBtn.addEventListener('click', function() {
+            loginModal.style.display = 'flex';
+        });
+        
+        closeDashboard.addEventListener('click', function() {
+            dashboardModal.style.display = 'none';
+        });
+        
+        closeLogin.addEventListener('click', function() {
+            loginModal.style.display = 'none';
+        });
+        
+        // Login form handling
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // Check credentials
+            if (username === 'kelnic6' && password === 'kelnic6s@6') {
+                // Successful login
+                loginModal.style.display = 'none';
+                dashboardModal.style.display = 'flex';
+            } else {
+                // Failed login
+                alert('Invalid username or password. Please try again.');
+            }
+        });
+        
+        // Close modals when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target === dashboardModal) {
+                dashboardModal.style.display = 'none';
+            }
+            if (event.target === loginModal) {
+                loginModal.style.display = 'none';
+            }
+        });
+        
+        // Simple animation on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const featureCards = document.querySelectorAll('.feature-card');
+            
+            featureCards.forEach((card, index) => {
+                // Add delay for staggered animation
+                card.style.transitionDelay = `${index * 0.1}s`;
+            });
+            
+            // Simulate AI content generation
+            simulateAIContent();
+        });
+        
+        // Simulate AI content generation and analytics
+        function simulateAIContent() {
+            console.log("AI Helpers initialized...");
+            console.log("Data Analyst: Analyzing food cost patterns...");
+            console.log("Inventory Manager: Optimizing stock levels...");
+            console.log("Cost Predictor: Monitoring price fluctuations...");
+            console.log("Security Guardian: Ensuring compliance with regional regulations...");
+            
+            // Simulate ongoing AI activity
+            setInterval(() => {
+                const messages = [
+                    "AI Helper: Generated 3 new social media posts",
+                    "AI Helper: Identified R2,450 in potential savings for client",
+                    "AI Helper: Sent personalized emails to 12 hotel managers",
+                    "AI Helper: Updated predictive models with latest market data",
+                    "AI Helper: Completed security audit - all systems secure"
+                ];
+                const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+                console.log(randomMessage);
+            }, 10000);
+        }
+    </script>
+</body>
+</html>
